@@ -1,9 +1,9 @@
 ---
 const navLinks = [
   { label: 'Inicio', href: '/' },
-  { label: 'Perfiles', href: '/perfiles' },
+  { label: 'Escorts', href: '/perfiles' },
   { label: 'Servicios', href: '/#servicios' },
-  { label: 'Contacto', href: '/#contacto' },
+  { label: 'Trabaja con Nosotros', href: '/#trabaja' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" data-navbar>
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
-      <span class="text-2xl font-bold tracking-[0.2em] uppercase text-white group-hover:text-[#c9a84c] transition-colors duration-300" style="font-family: 'Playfair Display', serif;">
+      <span class="text-2xl uppercase text-white group-hover:text-[#c9a84c] transition-colors duration-300" style="font-family: 'Anton', sans-serif; letter-spacing: 0.15em;">
         OLYMPUS
       </span>
       <span class="text-[#c9a84c] text-xs tracking-[0.3em] uppercase hidden sm:block">Agencia</span>
@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
 
     <div class="hidden md:flex items-center gap-4">
       <a href="/#contacto" class="btn-gold text-xs py-2 px-5">
-        Reservar
+        Háblanos
       </a>
     </div>
 
@@ -54,7 +54,7 @@ const currentPath = Astro.url.pathname;
           {link.label}
         </a>
       ))}
-      <a href="/#contacto" class="btn-gold text-center mt-2">Reservar</a>
+      <a href="/#contacto" class="btn-gold text-center mt-2">Háblanos</a>
     </div>
   </div>
 </header>

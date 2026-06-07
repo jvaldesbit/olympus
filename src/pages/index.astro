@@ -3,42 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import ProfileCard from '../components/ProfileCard.astro';
+import escortsData from '../data/escorts.json';
 
-const featuredProfiles = [
-  {
-    name: 'Valentina',
-    age: 24,
-    city: 'Bogotá',
-    tags: ['Compañía', 'Viajes', 'VIP'],
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=80',
-    slug: 'valentina',
-    featured: true,
-  },
-  {
-    name: 'Isabella',
-    age: 22,
-    city: 'Medellín',
-    tags: ['Eventos', 'Elegancia', 'Premium'],
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
-    slug: 'isabella',
-  },
-  {
-    name: 'Camila',
-    age: 26,
-    city: 'Cali',
-    tags: ['Compañía', 'Conversación', 'Discreta'],
-    image: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&q=80',
-    slug: 'camila',
-  },
-  {
-    name: 'Sofia',
-    age: 23,
-    city: 'Bogotá',
-    tags: ['Viajes', 'VIP', 'Internacional'],
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
-    slug: 'sofia',
-  },
-];
+const featuredProfiles = escortsData
+  .filter(e => e.images.length > 1)
+  .slice(0, 4)
+  .map(e => ({
+    name: e.name,
+    age: e.age,
+    city: e.city,
+    tags: e.services.slice(0, 3).length > 0 ? e.services.slice(0, 3) : [e.skin, e.hair].filter(Boolean),
+    image: e.images[0],
+    slug: e.slug,
+    featured: e.available,
+  }));
 ---
 
 <Layout title="Inicio">
@@ -47,26 +25,34 @@ const featuredProfiles = [
   <!-- Hero -->
   <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-      <img
-        src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80"
-        alt=""
-        class="w-full h-full object-cover opacity-30"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 via-[#0a0a0a]/40 to-[#0a0a0a]" />
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-cover opacity-60"
+      >
+        <source src="/home.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/50 via-[#0a0a0a]/30 to-[#0a0a0a]" />
     </div>
 
-    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-      <p class="text-[#c9a84c] text-xs tracking-[0.5em] uppercase mb-6">Agencia Exclusiva</p>
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight">
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <h1 class="text-6xl md:text-8xl lg:text-9xl text-white mb-4 leading-none" style="font-family: 'Anton', sans-serif; letter-spacing: 0.08em;">
         OLYMPUS
       </h1>
-      <div class="gold-divider mb-6"></div>
-      <p class="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10 font-light">
-        Compañía de alto nivel para quienes aprecian la elegancia, la discreción y las experiencias verdaderamente únicas.
+      <div class="gold-divider mb-8"></div>
+
+      <p class="text-white/90 text-xl md:text-3xl font-light tracking-wide mb-3">
+        Las mejores <span class="text-[#c9a84c] font-semibold">escorts</span> y <span class="text-[#c9a84c] font-semibold">acompañantes</span> de Colombia
       </p>
+      <p class="text-gray-400 text-sm md:text-base tracking-[0.3em] uppercase mb-10">
+        Prepagos · Privadas · Verificadas · Discretas
+      </p>
+
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/perfiles" class="btn-gold">Ver Perfiles</a>
-        <a href="#servicios" class="btn-outline">Nuestros Servicios</a>
+        <a href="/perfiles" class="btn-gold">Ver Escorts</a>
+        <a href="#contacto" class="btn-outline">Reservar Ahora</a>
       </div>
     </div>
 
@@ -84,18 +70,18 @@ const featuredProfiles = [
       <h2 class="section-title">La Cima del Lujo y la Discreción</h2>
       <div class="gold-divider"></div>
       <p class="text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mt-6">
-        En Olympus reunimos a las acompañantes más selectas del país. Cada perfil es cuidadosamente verificado para garantizar experiencias memorables, seguras y completamente discretas. Tu satisfacción y privacidad son nuestra prioridad absoluta.
+        En Olympus reunimos a las escorts más selectas del país. Cada una es cuidadosamente verificada para garantizar experiencias memorables, seguras y completamente discretas. Tu satisfacción y privacidad son nuestra prioridad absoluta.
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
         {[
-          { number: '100+', label: 'Perfiles Activos', icon: '◈' },
+          { number: '100+', label: 'Escorts Activas', icon: '◈' },
           { number: '5★', label: 'Calificación Promedio', icon: '◆' },
           { number: '24/7', label: 'Atención al Cliente', icon: '◉' },
         ].map(stat => (
           <div class="border border-[#c9a84c]/20 p-8 bg-[#111111] hover:border-[#c9a84c]/50 transition-colors duration-300">
             <div class="text-[#c9a84c] text-2xl mb-3">{stat.icon}</div>
-            <div class="text-white text-4xl font-bold mb-2" style="font-family: 'Playfair Display', serif;">{stat.number}</div>
+            <div class="text-white text-4xl font-bold mb-2" style=\"font-family:'Anton',sans-serif; letter-spacing:0.06em;\">{stat.number}</div>
             <div class="text-gray-500 text-sm tracking-widest uppercase">{stat.label}</div>
           </div>
         ))}
@@ -108,7 +94,7 @@ const featuredProfiles = [
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-14">
         <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-4">Selección Premium</p>
-        <h2 class="section-title">Perfiles Destacados</h2>
+        <h2 class="section-title">Escorts Destacadas</h2>
         <div class="gold-divider"></div>
       </div>
 
@@ -119,7 +105,7 @@ const featuredProfiles = [
       </div>
 
       <div class="text-center mt-12">
-        <a href="/perfiles" class="btn-outline">Ver Todos los Perfiles</a>
+        <a href="/perfiles" class="btn-outline">Ver Todas las Escorts</a>
       </div>
     </div>
   </section>
@@ -172,7 +158,7 @@ const featuredProfiles = [
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={service.icon}/>
               </svg>
             </div>
-            <h3 class="text-white text-lg font-semibold mb-3" style="font-family: 'Playfair Display', serif;">{service.title}</h3>
+            <h3 class="text-white text-lg font-semibold mb-3" style=\"font-family:'Anton',sans-serif; letter-spacing:0.06em;\">{service.title}</h3>
             <p class="text-gray-500 text-sm leading-relaxed">{service.desc}</p>
           </div>
         ))}
@@ -197,7 +183,7 @@ const featuredProfiles = [
             city: 'Bogotá',
           },
           {
-            text: 'El nivel de atención al detalle y la calidad de sus perfiles superó todas mis expectativas. Volveré sin dudarlo.',
+            text: 'El nivel de atención al detalle y la calidad de sus escorts superó todas mis expectativas. Volveré sin dudarlo.',
             author: 'R.A.',
             city: 'Medellín',
           },
@@ -278,7 +264,7 @@ const featuredProfiles = [
 
         <div class="flex flex-col justify-center gap-8">
           <div>
-            <h3 class="text-white font-semibold mb-6" style="font-family: 'Playfair Display', serif;">Contacto Directo</h3>
+            <h3 class="text-white font-semibold mb-6" style=\"font-family:'Anton',sans-serif; letter-spacing:0.06em;\">Contacto Directo</h3>
             <div class="space-y-5">
               {[
                 { label: 'WhatsApp', value: '+1 (234) 567-890', href: 'https://wa.me/1234567890' },

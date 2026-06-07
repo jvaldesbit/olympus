@@ -2,242 +2,334 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
+import escortsData from '../../data/escorts.json';
 
 export function getStaticPaths() {
-  return [
-    { params: { slug: 'valentina' } },
-    { params: { slug: 'isabella' } },
-    { params: { slug: 'camila' } },
-    { params: { slug: 'sofia' } },
-    { params: { slug: 'natalia' } },
-    { params: { slug: 'alejandra' } },
-    { params: { slug: 'daniela' } },
-    { params: { slug: 'mariana' } },
-  ];
+  return escortsData.map(e => ({ params: { slug: e.slug } }));
 }
 
-const profiles: Record<string, {
-  name: string;
-  age: number;
-  city: string;
-  tags: string[];
-  image: string;
-  gallery: string[];
-  bio: string;
-  services: string[];
-  height: string;
-  nationality: string;
-  languages: string[];
-}> = {
-  valentina: {
-    name: 'Valentina',
-    age: 24,
-    city: 'Bogotá',
-    tags: ['Compañía', 'Viajes', 'VIP'],
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&q=80',
-      'https://images.unsplash.com/photo-1526510747491-58f928ec870f?w=500&q=80',
-      'https://images.unsplash.com/photo-1519311965067-36d3e5f33d39?w=500&q=80',
-    ],
-    bio: 'Valentina es una joven sofisticada con un encanto natural que cautiva a todos. Con estudios en administración de empresas y una personalidad magnética, es la compañera perfecta para eventos exclusivos o escapadas privadas.',
-    services: ['Cenas románticas', 'Eventos sociales', 'Viajes nacionales', 'Viajes internacionales', 'Compañía VIP'],
-    height: '1.68m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés'],
-  },
-  isabella: {
-    name: 'Isabella',
-    age: 22,
-    city: 'Medellín',
-    tags: ['Eventos', 'Elegancia', 'Premium'],
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80',
-    ],
-    bio: 'Isabella irradia elegancia y sofisticación. Experta en protocolo social, es la compañera ideal para eventos corporativos de alto nivel donde la imagen y el porte son fundamentales.',
-    services: ['Eventos corporativos', 'Galas y recepciones', 'Cenas de negocios', 'Compañía social'],
-    height: '1.72m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés', 'Francés'],
-  },
-  camila: {
-    name: 'Camila',
-    age: 26,
-    city: 'Cali',
-    tags: ['Compañía', 'Conversación', 'Discreta'],
-    image: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=500&q=80',
-    ],
-    bio: 'Camila combina inteligencia y sensualidad con una discreción impecable. Lectora voraz y conversadora brillante, adaptada a cualquier ambiente social con naturalidad.',
-    services: ['Compañía intelectual', 'Cenas privadas', 'Eventos culturales', 'Escapadas de fin de semana'],
-    height: '1.65m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés'],
-  },
-  sofia: {
-    name: 'Sofia',
-    age: 23,
-    city: 'Bogotá',
-    tags: ['Viajes', 'VIP', 'Internacional'],
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80',
-    ],
-    bio: 'Sofía es cosmopolita y viajera empedernida. Con experiencia en destinos de lujo en todo el mundo, es la compañera perfecta para aventuras internacionales sin límites.',
-    services: ['Viajes internacionales', 'Yates y cruceros', 'Experiencias de lujo', 'Compañía VIP'],
-    height: '1.70m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés', 'Portugués'],
-  },
-  natalia: {
-    name: 'Natalia',
-    age: 25,
-    city: 'Medellín',
-    tags: ['Cenas', 'Eventos', 'Exclusiva'],
-    image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=800&q=80',
-    gallery: [],
-    bio: 'Natalia posee una presencia que no pasa desapercibida. Modelo profesional con años de experiencia en el mundo del entretenimiento, ofrece una compañía única e irrepetible.',
-    services: ['Eventos exclusivos', 'Cenas románticas', 'Sesiones fotográficas', 'Compañía privada'],
-    height: '1.75m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés'],
-  },
-  alejandra: {
-    name: 'Alejandra',
-    age: 27,
-    city: 'Bogotá',
-    tags: ['VIP', 'Viajes', 'Premium'],
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80',
-    gallery: [],
-    bio: 'Alejandra es la definición de mujer moderna: profesional, elegante y fascinante. Su formación en relaciones internacionales la convierte en la compañera perfecta para cualquier escenario.',
-    services: ['Viajes VIP', 'Eventos diplomáticos', 'Cenas exclusivas', 'Compañía a largo plazo'],
-    height: '1.67m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés', 'Alemán'],
-  },
-  daniela: {
-    name: 'Daniela',
-    age: 21,
-    city: 'Cali',
-    tags: ['Compañía', 'Joven', 'Dinámica'],
-    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80',
-    gallery: [],
-    bio: 'Daniela es energía pura. Joven, espontánea y llena de vida, trae frescura y entusiasmo a cada encuentro. Perfecta para quienes buscan una compañía vibrante y divertida.',
-    services: ['Salidas dinámicas', 'Eventos informales', 'Compañía joven', 'Actividades al aire libre'],
-    height: '1.63m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés básico'],
-  },
-  mariana: {
-    name: 'Mariana',
-    age: 28,
-    city: 'Barranquilla',
-    tags: ['Madura', 'Sofisticada', 'Internacional'],
-    image: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=800&q=80',
-    gallery: [],
-    bio: 'Mariana es la combinación perfecta de madurez y sensualidad. Con amplia experiencia en el mundo empresarial, ofrece una compañía refinada y estimulante en todos los sentidos.',
-    services: ['Compañía ejecutiva', 'Viajes de negocios', 'Cenas de alto nivel', 'Eventos internacionales'],
-    height: '1.69m',
-    nationality: 'Colombiana',
-    languages: ['Español', 'Inglés', 'Italiano'],
-  },
-};
+function formatPrice(raw: string) {
+  const n = parseInt(raw);
+  return isNaN(n) ? raw : n.toLocaleString('es-CO');
+}
 
 const { slug } = Astro.params;
-const profile = profiles[slug as string];
+const profile = escortsData.find(e => e.slug === slug);
+if (!profile) return Astro.redirect('/perfiles');
 
-if (!profile) {
-  return Astro.redirect('/perfiles');
-}
+const mainImage = profile.images[0] ?? '';
+const whatsappLink = `https://wa.me/57${(profile.phone ?? '').replace(/\s/g, '')}`;
+
+const rates = [
+  { label: '1 Hora',  price: formatPrice(profile.rates[0]?.price ?? ''), clocks: 1 },
+  { label: '2 Horas', price: formatPrice(profile.rates[1]?.price ?? ''), clocks: 2 },
+  { label: '5 Horas', price: formatPrice(profile.rates[2]?.price ?? ''), clocks: 5 },
+];
+
+const physical = [
+  { label: 'Altura', value: profile.height ? `${profile.height} cm` : '' },
+  { label: 'Piel', value: profile.skin },
+  { label: 'Cabello', value: profile.hair },
+  { label: 'Ojos', value: profile.eyes },
+  { label: 'Busto', value: profile.bust },
+  { label: 'Cola', value: profile.ass },
+  { label: 'Contextura', value: profile.contexture },
+  { label: 'Cirugías', value: profile.surgeries },
+].filter(c => c.value);
+
+const personal = [
+  { label: 'Idiomas', value: profile.languages },
+  { label: 'Le gusta', value: profile.interest },
+  { label: 'Comida', value: profile.food },
+  { label: 'Bebida', value: profile.drinks },
+  { label: 'Estilo', value: profile.dress_style },
+  { label: 'Zona', value: profile.neighborhood || profile.city },
+].filter(c => c.value);
 ---
 
-<Layout title={profile.name} description={`Perfil de ${profile.name} — Olympus Agency`}>
+<Layout title={profile.name} description={`${profile.name}, ${profile.age} años — Escort en ${profile.city} | Olympus Agency`}>
   <Navbar />
 
-  <div class="pt-20 min-h-screen">
-    <div class="max-w-6xl mx-auto px-6 py-16">
+  <!-- HERO: imagen principal full ancho con nombre encima -->
+  <div class="relative w-full overflow-hidden" style="height: 85vh; min-height: 500px;">
+    <video
+      id="profile-video"
+      src={profile.video ?? ''}
+      class="hidden absolute inset-0 w-full h-full object-cover"
+      controls
+      playsinline
+    />
+    <img
+      id="main-image"
+      src={mainImage}
+      alt={profile.name}
+      class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-500"
+    />
+    <!-- Gradiente bottom -->
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent"></div>
+    <!-- Gradiente top para navbar -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 to-transparent" style="height:120px;"></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <!-- Imagen principal -->
-        <div class="relative">
-          <img
-            src={profile.image}
-            alt={profile.name}
-            class="w-full aspect-[3/4] object-cover"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+    <!-- Badges top -->
+    <div class="absolute top-24 left-6 md:left-10 flex gap-3">
+      {profile.available && (
+        <div class="flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-1.5 border border-green-500/30">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+          <span class="text-green-400 text-[10px] font-['Manrope'] font-bold tracking-widest uppercase">Disponible</span>
         </div>
+      )}
+      {profile.is_new && (
+        <div class="bg-[#c9a84c] px-3 py-1.5">
+          <span class="text-black text-[10px] font-['Manrope'] font-bold tracking-widest uppercase">Nueva</span>
+        </div>
+      )}
+    </div>
 
-        <!-- Info -->
-        <div class="flex flex-col justify-center">
-          <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-2">{profile.city}</p>
-          <h1 class="text-5xl md:text-6xl font-bold text-white mb-2" style="font-family: 'Playfair Display', serif;">
-            {profile.name}
-          </h1>
-          <div class="flex items-center gap-4 mb-8">
-            <span class="text-gray-500 text-sm">{profile.age} años</span>
-            <span class="w-px h-4 bg-[#c9a84c]/30"></span>
-            <span class="text-gray-500 text-sm">{profile.nationality}</span>
-            <span class="w-px h-4 bg-[#c9a84c]/30"></span>
-            <span class="text-gray-500 text-sm">{profile.height}</span>
+    <!-- Nombre sobre imagen -->
+    <div class="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8">
+      <p class="text-[#c9a84c] text-xs tracking-[0.5em] uppercase font-['Manrope'] mb-2">
+        {profile.city}{profile.neighborhood ? ` · ${profile.neighborhood}` : ''}
+      </p>
+      <h1 class="text-5xl sm:text-7xl md:text-8xl text-white leading-none" style="font-family:'Anton',sans-serif; letter-spacing:0.05em;">
+        {profile.name.toUpperCase()}
+      </h1>
+      <div class="flex items-center gap-5 mt-3">
+        <span class="text-gray-300 text-sm font-['Manrope']">{profile.age} años</span>
+        <span class="w-px h-3 bg-[#c9a84c]/40"></span>
+        <span class="text-gray-300 text-sm font-['Manrope']">{profile.height} cm</span>
+        <span class="w-px h-3 bg-[#c9a84c]/40"></span>
+        <span class="text-gray-300 text-sm font-['Manrope']">{profile.skin}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- THUMBNAILS -->
+  {profile.images.length > 1 && (
+    <div class="bg-[#0d0d0d] border-b border-[#c9a84c]/10 px-6 md:px-10 py-4">
+      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+        {profile.images.map((img: string, i: number) => (
+          <button
+            class:list={[
+              'thumb-btn shrink-0 w-16 h-16 md:w-20 md:h-20 overflow-hidden border-2 transition-all duration-200',
+              i === 0 ? 'border-[#c9a84c]' : 'border-transparent opacity-50 hover:opacity-90'
+            ]}
+            data-src={img}
+          >
+            <img src={img} alt="" class="w-full h-full object-cover" loading="lazy" />
+          </button>
+        ))}
+        {profile.video && (
+          <button
+            id="video-thumb"
+            class="shrink-0 w-16 h-16 md:w-20 md:h-20 border-2 border-transparent opacity-50 hover:opacity-90 hover:border-[#c9a84c] bg-[#111] flex flex-col items-center justify-center gap-1 transition-all duration-200"
+          >
+            <svg class="w-5 h-5 text-[#c9a84c]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+            <span class="text-[#c9a84c] text-[8px] font-['Manrope'] tracking-widest uppercase">Video</span>
+          </button>
+        )}
+      </div>
+    </div>
+  )}
+
+  <!-- CUERPO PRINCIPAL -->
+  <div class="bg-[#0a0a0a]">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-12">
+
+      <!-- Breadcrumb -->
+      <div class="flex items-center gap-2 text-xs text-gray-600 mb-10 font-['Manrope']">
+        <a href="/" class="hover:text-[#c9a84c] transition-colors">Inicio</a>
+        <span class="text-gray-700">/</span>
+        <a href="/perfiles" class="hover:text-[#c9a84c] transition-colors">Escorts</a>
+        <span class="text-gray-700">/</span>
+        <span class="text-gray-400">{profile.name}</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 xl:gap-16">
+
+        <!-- INFO IZQUIERDA -->
+        <div class="space-y-8">
+
+          <!-- Características físicas -->
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <h2 class="text-white tracking-[0.25em] uppercase text-sm" style="font-family:'Anton',sans-serif;">Características físicas</h2>
+              <div class="flex-1 h-px bg-[#c9a84c]/15"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-px bg-[#c9a84c]/5">
+              {physical.map(char => (
+                <div class="bg-[#0a0a0a] p-4 hover:bg-[#111] transition-colors duration-200">
+                  <p class="text-gray-600 text-[9px] tracking-[0.2em] uppercase font-['Manrope'] mb-1.5">{char.label}</p>
+                  <p class="text-white text-sm font-['Manrope'] font-semibold">{char.value}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <p class="text-gray-400 text-base leading-relaxed mb-8">{profile.bio}</p>
-
-          <!-- Tags -->
-          <div class="flex flex-wrap gap-2 mb-8">
-            {profile.tags.map(tag => (
-              <span class="text-[10px] tracking-widest uppercase text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1">
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <!-- Idiomas -->
-          <div class="mb-8">
-            <p class="text-[#c9a84c] text-xs tracking-widest uppercase mb-3">Idiomas</p>
-            <p class="text-gray-400 text-sm">{profile.languages.join(' · ')}</p>
+          <!-- Sobre ella -->
+          <div>
+            <div class="flex items-center gap-4 mb-6">
+              <h2 class="text-white tracking-[0.25em] uppercase text-sm" style="font-family:'Anton',sans-serif;">Sobre ella</h2>
+              <div class="flex-1 h-px bg-[#c9a84c]/15"></div>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-px bg-[#c9a84c]/5">
+              {personal.map(item => (
+                <div class="bg-[#0a0a0a] p-4 hover:bg-[#111] transition-colors duration-200">
+                  <p class="text-gray-600 text-[9px] tracking-[0.2em] uppercase font-['Manrope'] mb-1.5">{item.label}</p>
+                  <p class="text-white text-sm font-['Manrope'] font-semibold">{item.value}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <!-- Servicios -->
-          <div class="mb-10">
-            <p class="text-[#c9a84c] text-xs tracking-widest uppercase mb-4">Servicios</p>
-            <ul class="space-y-2">
-              {profile.services.map(service => (
-                <li class="flex items-center gap-3 text-gray-400 text-sm">
-                  <span class="w-1 h-1 bg-[#c9a84c] rounded-full shrink-0"></span>
-                  {service}
-                </li>
-              ))}
-            </ul>
+          {profile.services && profile.services.length > 0 && (
+            <div>
+              <div class="flex items-center gap-4 mb-6">
+                <h2 class="text-white tracking-[0.25em] uppercase text-sm" style="font-family:'Anton',sans-serif;">Servicios</h2>
+                <div class="flex-1 h-px bg-[#c9a84c]/15"></div>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                {profile.services.map((s: string) => (
+                  <span class="text-xs tracking-widest uppercase text-[#c9a84c] border border-[#c9a84c]/25 px-4 py-2 font-['Manrope'] hover:bg-[#c9a84c]/5 transition-colors">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        <!-- SIDEBAR DERECHA: Tarifas + CTA -->
+        <div class="lg:sticky lg:top-24 lg:self-start space-y-4">
+
+          <!-- Tarifas -->
+          {rates.length > 0 && (
+            <div class="border border-[#c9a84c]/20 bg-[#0d0d0d]">
+              <div class="px-6 py-4 border-b border-[#c9a84c]/10">
+                <h2 class="text-white tracking-[0.25em] uppercase text-xs" style="font-family:'Anton',sans-serif;">Tarifas</h2>
+              </div>
+              <div class="px-6 py-4 space-y-4">
+                {rates.map((r, i) => (
+                  <div class:list={['flex items-center justify-between py-3', i < rates.length - 1 ? 'border-b border-[#ffffff05]' : '']}>
+                    <div class="flex items-center gap-2">
+                      <div class="flex items-center gap-0.5">
+                        {Array.from({ length: r.clocks > 3 ? 3 : r.clocks }).map(() => (
+                          <svg class="w-3.5 h-3.5 text-[#c9a84c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="9" stroke-width="1.5"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 7v5l3 3"/>
+                          </svg>
+                        ))}
+                      </div>
+                      <span class="text-gray-500 text-sm font-['Manrope']">{r.label}</span>
+                    </div>
+                    <div class="text-right">
+                      <span class="text-white font-bold text-base font-['Manrope']">$ {r.price}</span>
+                      <span class="text-gray-600 text-xs font-['Manrope'] ml-1">COP</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Info tarifas -->
+          <div class="border border-[#c9a84c]/10 px-5 py-4 space-y-3">
+            <div class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-[#c9a84c] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <p class="text-gray-500 text-xs font-['Manrope'] leading-relaxed">
+                Estas tarifas <strong class="text-gray-300">incluyen transporte y preservativos</strong>
+              </p>
+            </div>
+            <div class="flex items-start gap-2">
+              <svg class="w-3.5 h-3.5 text-[#c9a84c] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+              </svg>
+              <div>
+                <p class="text-[#c9a84c] text-[10px] tracking-widest uppercase font-['Manrope'] font-bold mb-1">Medios de Pago</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {['PSE', 'Nequi', 'Bre-B', 'DaviPlata', 'Tarjeta Crédito'].map(m => (
+                    <span class="text-[10px] font-['Manrope'] text-gray-400 border border-[#ffffff08] px-2 py-0.5 bg-[#ffffff03]">{m}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="flex gap-4">
-            <a href="https://wa.me/1234567890" target="_blank" rel="noopener" class="btn-gold flex-1 text-center">
-              Reservar Ahora
-            </a>
-            <a href="/perfiles" class="btn-outline px-5 py-3">
-              ← Volver
-            </a>
+          <!-- CTAs -->
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener"
+            class="flex items-center justify-center gap-3 w-full bg-[#c9a84c] text-black font-bold text-sm tracking-widest uppercase py-4 hover:bg-[#e8c96e] transition-colors duration-300 font-['Manrope']"
+          >
+            <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.122 1.522 5.858L0 24l6.335-1.498A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.797 9.797 0 01-5.017-1.378l-.36-.214-3.724.88.93-3.613-.234-.372A9.757 9.757 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
+            </svg>
+            Escríbeme Ahora
+          </a>
+
+          <!-- Discreción -->
+          <div class="bg-[#c9a84c]/5 border border-[#c9a84c]/10 px-5 py-4">
+            <p class="text-[#c9a84c] text-[10px] tracking-widest uppercase font-['Manrope'] font-bold mb-1.5">100% Discreción</p>
+            <p class="text-gray-600 text-xs leading-relaxed font-['Manrope']">Toda comunicación es privada y confidencial. Servicio exclusivo para mayores de 18 años.</p>
           </div>
+
+          <!-- Volver -->
+          <a href="/perfiles" class="flex items-center justify-center gap-2 text-gray-700 text-xs tracking-widest uppercase py-2 hover:text-gray-400 transition-colors font-['Manrope']">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Ver todas las escorts
+          </a>
+
         </div>
       </div>
-
-      <!-- Galería -->
-      {profile.gallery.length > 0 && (
-        <div class="mt-16">
-          <h2 class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-6">Galería</h2>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {profile.gallery.map(img => (
-              <img src={img} alt={profile.name} class="w-full aspect-[3/4] object-cover" loading="lazy" />
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   </div>
 
   <Footer />
 </Layout>
+
+<script>
+  const mainImg = document.getElementById('main-image') as HTMLImageElement;
+  const profileVideo = document.getElementById('profile-video') as HTMLVideoElement | null;
+  const thumbBtns = document.querySelectorAll('.thumb-btn');
+  const videoThumb = document.getElementById('video-thumb');
+
+  function setActive(activeBtn: Element) {
+    [...thumbBtns, videoThumb].filter(Boolean).forEach(b => {
+      b!.classList.remove('border-[#c9a84c]', 'opacity-100');
+      b!.classList.add('border-transparent', 'opacity-50');
+    });
+    activeBtn.classList.add('border-[#c9a84c]', 'opacity-100');
+    activeBtn.classList.remove('border-transparent', 'opacity-50');
+  }
+
+  thumbBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = (btn as HTMLElement).dataset.src!;
+      if (profileVideo) { profileVideo.classList.add('hidden'); profileVideo.pause(); }
+      mainImg.classList.remove('hidden');
+      mainImg.src = src;
+      setActive(btn);
+    });
+  });
+
+  videoThumb?.addEventListener('click', () => {
+    if (!profileVideo) return;
+    mainImg.classList.add('hidden');
+    profileVideo.classList.remove('hidden');
+    profileVideo.play();
+    setActive(videoThumb);
+  });
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>

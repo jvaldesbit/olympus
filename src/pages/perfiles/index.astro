@@ -3,100 +3,52 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 import ProfileCard from '../../components/ProfileCard.astro';
+import escortsData from '../../data/escorts.json';
 
-const profiles = [
-  {
-    name: 'Valentina',
-    age: 24,
-    city: 'Bogotá',
-    tags: ['Compañía', 'Viajes', 'VIP'],
-    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=80',
-    slug: 'valentina',
-    featured: true,
-  },
-  {
-    name: 'Isabella',
-    age: 22,
-    city: 'Medellín',
-    tags: ['Eventos', 'Elegancia', 'Premium'],
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
-    slug: 'isabella',
-  },
-  {
-    name: 'Camila',
-    age: 26,
-    city: 'Cali',
-    tags: ['Compañía', 'Conversación', 'Discreta'],
-    image: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&q=80',
-    slug: 'camila',
-  },
-  {
-    name: 'Sofia',
-    age: 23,
-    city: 'Bogotá',
-    tags: ['Viajes', 'VIP', 'Internacional'],
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
-    slug: 'sofia',
-  },
-  {
-    name: 'Natalia',
-    age: 25,
-    city: 'Medellín',
-    tags: ['Cenas', 'Eventos', 'Exclusiva'],
-    image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80',
-    slug: 'natalia',
-  },
-  {
-    name: 'Alejandra',
-    age: 27,
-    city: 'Bogotá',
-    tags: ['VIP', 'Viajes', 'Premium'],
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80',
-    slug: 'alejandra',
-  },
-  {
-    name: 'Daniela',
-    age: 21,
-    city: 'Cali',
-    tags: ['Compañía', 'Joven', 'Dinámica'],
-    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80',
-    slug: 'daniela',
-  },
-  {
-    name: 'Mariana',
-    age: 28,
-    city: 'Barranquilla',
-    tags: ['Madura', 'Sofisticada', 'Internacional'],
-    image: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&q=80',
-    slug: 'mariana',
-  },
-];
+// Normalizar precios para mostrar
+function formatPrice(p: string) {
+  const n = parseInt(p);
+  return isNaN(n) ? p : n.toLocaleString('es-CO');
+}
 
-const cities = ['Todas', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
+// Solo mostrar escorts que tengan más de una foto
+const profiles = escortsData
+  .filter(e => e.images.length > 1)
+  .map(e => ({
+    name: e.name,
+    age: e.age,
+    city: e.city,
+    tags: e.services.slice(0, 3).length > 0 ? e.services.slice(0, 3) : [e.skin, e.hair].filter(Boolean),
+    image: e.images[0],
+    slug: e.slug,
+    featured: e.available,
+  }));
+
+const cities = ['Todas', ...Array.from(new Set(escortsData.map(e => e.city))).sort()];
 ---
 
-<Layout title="Perfiles" description="Conoce nuestros perfiles exclusivos de acompañantes de lujo en Olympus Agency.">
+<Layout title="Escorts" description="Las mejores escorts y acompañantes de Colombia en Olympus Agency.">
   <Navbar />
 
   <div class="pt-28 pb-24 px-6 min-h-screen">
     <div class="max-w-7xl mx-auto">
 
       <div class="text-center mb-14">
-        <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-4">Selección Exclusiva</p>
-        <h1 class="section-title">Nuestros Perfiles</h1>
+        <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-4 font-['Manrope']">Selección Exclusiva</p>
+        <h1 class="section-title">Nuestras Escorts</h1>
         <div class="gold-divider"></div>
-        <p class="text-gray-500 text-sm mt-4 max-w-xl mx-auto">
-          Cada perfil ha sido verificado y seleccionado por su elegancia, discreción y profesionalismo.
+        <p class="text-gray-500 text-sm mt-4 max-w-xl mx-auto font-['Manrope']">
+          {profiles.length} perfiles verificados · Colombia
         </p>
       </div>
 
-      <!-- Filtros -->
+      <!-- Filtros por ciudad -->
       <div class="flex flex-wrap justify-center gap-3 mb-12" id="filters">
         {cities.map((city, i) => (
           <button
             data-filter={city === 'Todas' ? 'all' : city}
             class:list={[
-              'filter-btn text-xs tracking-widest uppercase px-5 py-2 border transition-all duration-300',
+              'filter-btn text-xs tracking-widest uppercase px-5 py-2 border transition-all duration-300 font-["Manrope"]',
               i === 0
                 ? 'border-[#c9a84c] text-[#c9a84c] bg-[#c9a84c]/10'
                 : 'border-[#c9a84c]/20 text-gray-500 hover:border-[#c9a84c]/50 hover:text-gray-300'
@@ -107,14 +59,19 @@ const cities = ['Todas', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
         ))}
       </div>
 
-      <!-- Grid de perfiles -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="profiles-grid">
+      <!-- Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3" id="profiles-grid">
         {profiles.map(profile => (
           <div data-city={profile.city} class="profile-item">
             <ProfileCard {...profile} />
           </div>
         ))}
       </div>
+
+      <!-- Contador visible -->
+      <p id="count-label" class="text-center text-gray-600 text-xs font-['Manrope'] tracking-widest mt-10 uppercase">
+        Mostrando {profiles.length} escorts
+      </p>
     </div>
   </div>
 
@@ -123,7 +80,8 @@ const cities = ['Todas', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
 
 <script>
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const profileItems = document.querySelectorAll('.profile-item');
+  const profileItems = document.querySelectorAll('.profile-item') as NodeListOf<HTMLElement>;
+  const countLabel = document.getElementById('count-label')!;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -134,15 +92,14 @@ const cities = ['Todas', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
       btn.classList.add('border-[#c9a84c]', 'text-[#c9a84c]', 'bg-[#c9a84c]/10');
       btn.classList.remove('border-[#c9a84c]/20', 'text-gray-500');
 
-      const filter = btn.getAttribute('data-filter');
+      const filter = (btn as HTMLElement).dataset.filter!;
+      let visible = 0;
       profileItems.forEach(item => {
-        const el = item as HTMLElement;
-        if (filter === 'all' || el.dataset.city === filter) {
-          el.style.display = 'block';
-        } else {
-          el.style.display = 'none';
-        }
+        const show = filter === 'all' || item.dataset.city === filter;
+        item.style.display = show ? 'block' : 'none';
+        if (show) visible++;
       });
+      countLabel.textContent = `Mostrando ${visible} escort${visible !== 1 ? 's' : ''}`;
     });
   });
 </script>

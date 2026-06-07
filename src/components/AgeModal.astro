@@ -1,0 +1,72 @@
+---
+---
+
+<div id="age-modal" class="fixed inset-0 z-[999] flex items-center justify-center p-4" style="display:none!important">
+  <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+
+  <div class="relative z-10 bg-[#111111] border border-[#c9a84c]/30 max-w-lg w-full p-8 md:p-10">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <span class="text-3xl text-white" style="font-family: 'Anton', sans-serif; letter-spacing: 0.15em;">OLYMPUS</span>
+      <div class="w-12 h-px bg-[#c9a84c] mx-auto mt-3"></div>
+    </div>
+
+    <!-- Advertencia edad -->
+    <div class="flex items-start gap-4 mb-6">
+      <div class="shrink-0 w-10 h-10 border border-[#c9a84c]/40 flex items-center justify-center">
+        <span class="text-[#c9a84c] font-bold text-sm">18+</span>
+      </div>
+      <p class="text-white font-semibold text-base leading-snug">
+        Esta web es para mayores de 18 años.
+      </p>
+    </div>
+
+    <!-- Texto cookies -->
+    <p class="text-gray-400 text-sm leading-relaxed mb-20 text-justify">
+      Utilizamos cookies técnicas para el correcto funcionamiento de la web. No recabamos ningún dato de carácter personal con las cookies de la analítica web con <em>anonymize ip</em>.
+    </p>
+
+    <!-- Botones -->
+    <div class="flex flex-col gap-3 mb-6">
+      <button
+        id="age-accept"
+        class="w-full bg-[#c9a84c] text-black font-bold text-sm tracking-widest uppercase py-3 px-6 hover:bg-[#e8c96e] transition-colors duration-300"
+      >
+        Soy mayor de 18 años — Entrar
+      </button>
+      <a
+        href="https://www.google.com"
+        class="w-full text-center border border-gray-600 text-gray-400 text-sm tracking-widest uppercase py-3 px-6 hover:border-gray-400 hover:text-gray-300 transition-colors duration-300"
+      >
+        Salir
+      </a>
+    </div>
+
+    <!-- Links legales -->
+    <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 pt-5 border-t border-white/5 text-xs">
+      <a href="/politica-cookies" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de Cookies</a>
+      <a href="/configuracion-cookies" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Configuración Cookie</a>
+      <a href="/control-parental" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Control parental</a>
+      <a href="/privacidad" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de privacidad</a>
+      <a href="/condiciones" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Condiciones de uso</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('age-modal')!;
+  const acceptBtn = document.getElementById('age-accept')!;
+
+  const accepted = sessionStorage.getItem('age-verified');
+
+  if (!accepted) {
+    modal.style.removeProperty('display');
+    document.body.style.overflow = 'hidden';
+  }
+
+  acceptBtn.addEventListener('click', () => {
+    sessionStorage.setItem('age-verified', '1');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+</script>

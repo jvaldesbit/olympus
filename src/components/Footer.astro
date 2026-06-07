@@ -6,7 +6,7 @@ const year = new Date().getFullYear();
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
       <div>
-        <h3 class="text-white text-xl font-bold tracking-[0.2em] uppercase mb-4" style="font-family: 'Playfair Display', serif;">
+        <h3 class="text-white text-xl uppercase mb-4" style="font-family: 'Anton', sans-serif; letter-spacing: 0.15em;">
           OLYMPUS
         </h3>
         <p class="text-gray-500 text-sm leading-relaxed">
@@ -17,9 +17,9 @@ const year = new Date().getFullYear();
       <div>
         <h4 class="text-[#c9a84c] text-xs tracking-widest uppercase mb-5">Navegación</h4>
         <ul class="space-y-3">
-          {['Inicio', 'Perfiles', 'Servicios', 'Contacto'].map(item => (
+          {['Inicio', 'Escorts', 'Servicios', 'Contacto'].map(item => (
             <li>
-              <a href={item === 'Inicio' ? '/' : item === 'Perfiles' ? '/perfiles' : `/#${item.toLowerCase()}`}
+              <a href={item === 'Inicio' ? '/' : item === 'Escorts' ? '/perfiles' : `/#${item.toLowerCase()}`}
                 class="text-gray-500 text-sm hover:text-[#c9a84c] transition-colors duration-300 tracking-wide">
                 {item}
               </a>

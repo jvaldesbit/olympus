@@ -20,5 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# archivos pesados
+public/home.mov
+public/*.json
+
 # jetbrains setting folder
 .idea/

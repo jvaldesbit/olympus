@@ -31,8 +31,8 @@ const { name, age, city, tags, image, slug, featured = false } = Astro.props;
     <div class="absolute bottom-0 left-0 right-0 p-5">
       <div class="flex items-end justify-between mb-3">
         <div>
-          <h3 class="text-white text-xl font-semibold" style="font-family: 'Playfair Display', serif;">{name}</h3>
-          <p class="text-gray-400 text-sm">{age} años · {city}</p>
+          <h3 class="text-white text-xl tracking-wide" style="font-family:'Anton',sans-serif; letter-spacing:0.06em;">{name}</h3>
+          <p class="text-gray-400 text-sm font-['Manrope']">{age} años · {city}</p>
         </div>
         <svg class="w-8 h-8 text-[#c9a84c] opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>

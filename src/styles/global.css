@@ -8,8 +8,8 @@
   --color-charcoal: #111111;
   --color-surface: #1a1a1a;
   --color-surface-2: #222222;
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-heading: "Anton", sans-serif;
+  --font-body: "Manrope", system-ui, sans-serif;
 }
 
 @layer base {
@@ -24,7 +24,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-heading);
+    font-family: 'Anton', sans-serif; letter-spacing: 0.06em;
   }
 }
 
@@ -38,8 +38,9 @@
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-white mb-4;
-    font-family: var(--font-heading);
+    @apply text-3xl md:text-4xl text-white mb-4;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.06em;
   }
 
   .gold-divider {

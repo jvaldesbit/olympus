@@ -1,0 +1,168 @@
+---
+import Layout from './Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  label?: string;
+}
+
+const { title, description, label = 'Legal' } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <Navbar />
+
+  <!-- Header de página -->
+  <div class="relative pt-32 pb-16 px-6 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#111111] to-[#0a0a0a]"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c9a84c]/40 to-transparent"></div>
+    <div class="relative max-w-4xl mx-auto">
+      <p class="text-[#c9a84c] text-xs tracking-[0.5em] uppercase mb-4 font-medium" style="font-family:'Manrope',sans-serif;">{label}</p>
+      <h1 class="text-4xl md:text-6xl text-white leading-tight" style="font-family:'Anton',sans-serif; letter-spacing:0.06em;">
+        {title.toUpperCase()}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="px-6 py-16 min-h-[60vh]">
+    <div class="max-w-4xl mx-auto">
+      <slot />
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Estilos compartidos para contenido legal */
+  :global(.legal-section) {
+    border-left: 2px solid #c9a84c33;
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  :global(.legal-section h2) {
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.06em;
+    font-size: 1.1rem;
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  :global(.legal-section p),
+  :global(.legal-section li) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #9ca3af;
+    font-weight: 300;
+  }
+
+  :global(.legal-section strong) {
+    color: white;
+    font-weight: 700;
+  }
+
+  :global(.legal-section ul) {
+    margin-top: 0.75rem;
+    space-y: 0.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  :global(.legal-section ul li) {
+    padding: 0.4rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  :global(.legal-section ul li::before) {
+    content: '▸';
+    color: #c9a84c;
+    position: absolute;
+    left: 0;
+    font-size: 0.7rem;
+    top: 0.55rem;
+  }
+
+  :global(.legal-section a) {
+    color: #c9a84c;
+    text-decoration: none;
+    border-bottom: 1px solid #c9a84c44;
+    transition: border-color 0.2s;
+  }
+
+  :global(.legal-section a:hover) {
+    border-color: #c9a84c;
+  }
+
+  :global(.legal-card) {
+    background: #111111;
+    border: 1px solid #c9a84c1a;
+    padding: 1.5rem;
+    transition: border-color 0.3s;
+  }
+
+  :global(.legal-card:hover) {
+    border-color: #c9a84c44;
+  }
+
+  :global(.legal-card h3) {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.4rem;
+    font-size: 0.95rem;
+  }
+
+  :global(.legal-card p) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  :global(.legal-badge) {
+    display: inline-block;
+    background: #c9a84c1a;
+    border: 1px solid #c9a84c33;
+    color: #c9a84c;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+  }
+
+  :global(.legal-note) {
+    background: #c9a84c0d;
+    border-left: 3px solid #c9a84c;
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.85rem;
+    color: #d1d5db;
+  }
+
+  :global(.legal-note strong) {
+    color: #c9a84c;
+    font-weight: 700;
+  }
+
+  :global(.legal-footer-note) {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #1f2937;
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.7rem;
+    color: #374151;
+    letter-spacing: 0.05em;
+  }
+</style>

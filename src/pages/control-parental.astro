@@ -1,0 +1,103 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const tools = [
+  {
+    name: 'Family Link',
+    provider: 'Google',
+    desc: 'Supervisa y gestiona la actividad en línea de tus hijos en dispositivos Android. Establece límites de tiempo, aprueba apps y visualiza la ubicación.',
+    url: 'https://families.google.com/familylink/',
+    free: true,
+  },
+  {
+    name: 'Screen Time',
+    provider: 'Apple',
+    desc: 'Herramienta integrada en iOS y macOS para establecer límites de tiempo de pantalla y filtros de contenido en todos tus dispositivos Apple.',
+    url: 'https://support.apple.com/es-es/HT208982',
+    free: true,
+  },
+  {
+    name: 'Microsoft Family Safety',
+    provider: 'Microsoft',
+    desc: 'Solución para supervisar el uso del dispositivo, filtrar contenido web y gestionar el tiempo de pantalla en Windows y Xbox.',
+    url: 'https://account.microsoft.com/family/',
+    free: true,
+  },
+  {
+    name: 'Net Nanny',
+    provider: 'ContentWatch',
+    desc: 'Software multiplataforma con filtros de contenido web avanzados, alertas en tiempo real y reportes de actividad detallados.',
+    url: 'https://www.netnanny.com/',
+    free: false,
+  },
+  {
+    name: 'Qustodio',
+    provider: 'Qustodio',
+    desc: 'Plataforma completa de control parental con seguimiento de redes sociales, filtros web y gestión de tiempo disponible en múltiples dispositivos.',
+    url: 'https://www.qustodio.com/',
+    free: false,
+  },
+];
+---
+
+<LegalLayout title="Control Parental" label="Ayuda para Padres" description="Recursos y herramientas de control parental para proteger a los menores.">
+
+  <div class="legal-note">
+    <strong>Contenido para adultos.</strong> Este sitio contiene material exclusivo para mayores de 18 años. Si eres padre o tutor, te ofrecemos a continuación herramientas y recursos para <strong>evitar que menores accedan a este tipo de contenido</strong>.
+  </div>
+
+  <div class="legal-section">
+    <h2>¿Qué es el control parental?</h2>
+    <p>El control parental es un conjunto de <strong>herramientas tecnológicas</strong> que permiten a padres y tutores supervisar y restringir el acceso a contenidos en internet no apropiados para menores de edad. Estas herramientas actúan a nivel de dispositivo, navegador o red doméstica.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>Herramientas recomendadas</h2>
+    <p style="margin-bottom:1.25rem;">A continuación encontrarás las soluciones más reconocidas y utilizadas:</p>
+    <div style="display:flex; flex-direction:column; gap:0.75rem;">
+      {tools.map(tool => (
+        <div class="legal-card">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:0.5rem;">
+            <div>
+              <h3 style="margin:0;">{tool.name} <span style="font-weight:300; color:#6b7280; font-size:0.75rem;">por {tool.provider}</span></h3>
+            </div>
+            <span class="legal-badge" style={tool.free ? '' : 'border-color:#4b5563; color:#6b7280;'}>
+              {tool.free ? 'Gratuito' : 'De pago'}
+            </span>
+          </div>
+          <p style="margin:0 0 0.75rem;">{tool.desc}</p>
+          <a href={tool.url} target="_blank" rel="noopener noreferrer" style="font-family:'Manrope',sans-serif; font-size:0.7rem; color:#c9a84c; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; border-bottom:1px solid #c9a84c44;">
+            Visitar sitio →
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <h2>DNS con filtro de contenido adulto</h2>
+    <p>Configura tu red para bloquear contenido adulto a nivel de <strong>todos los dispositivos del hogar</strong> usando estos servidores DNS gratuitos:</p>
+    <ul>
+      <li><strong>CleanBrowsing Family —</strong> <code style="color:#c9a84c; font-size:0.8rem;">185.228.168.168 / 185.228.169.168</code></li>
+      <li><strong>OpenDNS FamilyShield —</strong> <code style="color:#c9a84c; font-size:0.8rem;">208.67.222.123 / 208.67.220.123</code></li>
+      <li><strong>Cloudflare for Families —</strong> <code style="color:#c9a84c; font-size:0.8rem;">1.1.1.3 / 1.0.0.3</code></li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>Control parental en el router</h2>
+    <p>La mayoría de routers domésticos incluyen opciones nativas de control parental que permiten <strong>bloquear categorías enteras de sitios web</strong> para todos los dispositivos conectados a tu red. Consulta el manual de tu router o contacta a tu proveedor de internet.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>Recursos institucionales</h2>
+    <ul>
+      <li><strong>MinTIC Colombia —</strong> <a href="https://www.mintic.gov.co" target="_blank" rel="noopener">Ministerio de Tecnologías de la Información y las Comunicaciones</a></li>
+      <li><strong>ICBF —</strong> <a href="https://www.icbf.gov.co" target="_blank" rel="noopener">Instituto Colombiano de Bienestar Familiar</a></li>
+      <li><strong>Internet Matters —</strong> <a href="https://www.internetmatters.org" target="_blank" rel="noopener">Guías para padres sobre seguridad en internet</a></li>
+    </ul>
+  </div>
+
+  <p class="legal-footer-note">Última actualización: junio 2025 · <a href="/condiciones" style="color:#c9a84c;">Condiciones de Uso</a> · <a href="/privacidad" style="color:#c9a84c;">Política de Privacidad</a></p>
+
+</LegalLayout>
