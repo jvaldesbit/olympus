@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
@@ -61,14 +62,14 @@ import LegalLayout from '../layouts/LegalLayout.astro';
 
   <div style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;">
     <button id="save-settings" class="btn-gold" style="max-width:280px;">Guardar configuración</button>
-    <a href="/politica-cookies" style="font-family:'Manrope',sans-serif; font-size:0.75rem; color:#c9a84c; letter-spacing:0.1em; text-transform:uppercase;">→ Ver Política de Cookies completa</a>
+    <a href={u("/politica-cookies")} style="font-family:'Manrope',sans-serif; font-size:0.75rem; color:#c9a84c; letter-spacing:0.1em; text-transform:uppercase;">→ Ver Política de Cookies completa</a>
   </div>
 
   <div id="saved-msg" style="display:none; font-family:'Manrope',sans-serif; font-size:0.85rem; color:#c9a84c; background:#c9a84c0d; border:1px solid #c9a84c33; padding:0.75rem 1rem;">
     ✓ Configuración guardada correctamente.
   </div>
 
-  <p class="legal-footer-note">Última actualización: junio 2025 · <a href="/privacidad" style="color:#c9a84c;">Política de Privacidad</a></p>
+  <p class="legal-footer-note">Última actualización: junio 2025 · <a href={u("/privacidad")} style="color:#c9a84c;">Política de Privacidad</a></p>
 
 </LegalLayout>
 

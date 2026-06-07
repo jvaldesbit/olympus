@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
@@ -32,7 +33,7 @@ import LegalLayout from '../layouts/LegalLayout.astro';
       <li><strong>Safari —</strong> Preferencias → Privacidad → Cookies y datos de sitios web</li>
       <li><strong>Microsoft Edge —</strong> Configuración → Privacidad, búsqueda y servicios → Cookies</li>
     </ul>
-    <p style="margin-top:1rem;">También puedes gestionar tus preferencias en nuestra página de <a href="/configuracion-cookies">Configuración de Cookies</a>.</p>
+    <p style="margin-top:1rem;">También puedes gestionar tus preferencias en nuestra página de <a href={u("/configuracion-cookies")}>Configuración de Cookies</a>.</p>
   </div>
 
   <div class="legal-section">
@@ -40,6 +41,6 @@ import LegalLayout from '../layouts/LegalLayout.astro';
     <p>Podemos actualizar esta Política de Cookies en cualquier momento. Te recomendamos revisarla periódicamente para estar al tanto de cualquier cambio.</p>
   </div>
 
-  <p class="legal-footer-note">Última actualización: junio 2025 · <a href="/privacidad" style="color:#c9a84c;">Política de Privacidad</a> · <a href="/condiciones" style="color:#c9a84c;">Condiciones de Uso</a></p>
+  <p class="legal-footer-note">Última actualización: junio 2025 · <a href={u("/privacidad")} style="color:#c9a84c;">Política de Privacidad</a> · <a href={u("/condiciones")} style="color:#c9a84c;">Condiciones de Uso</a></p>
 
 </LegalLayout>

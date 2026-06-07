@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 import LegalLayout from '../layouts/LegalLayout.astro';
 
 const tools = [
@@ -98,6 +99,6 @@ const tools = [
     </ul>
   </div>
 
-  <p class="legal-footer-note">Última actualización: junio 2025 · <a href="/condiciones" style="color:#c9a84c;">Condiciones de Uso</a> · <a href="/privacidad" style="color:#c9a84c;">Política de Privacidad</a></p>
+  <p class="legal-footer-note">Última actualización: junio 2025 · <a href={u("/condiciones")} style="color:#c9a84c;">Condiciones de Uso</a> · <a href={u("/privacidad")} style="color:#c9a84c;">Política de Privacidad</a></p>
 
 </LegalLayout>

@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 import LegalLayout from '../layouts/LegalLayout.astro';
 ---
 
@@ -16,7 +17,7 @@ import LegalLayout from '../layouts/LegalLayout.astro';
   <div class="legal-section">
     <h2>2 — Mayoría de edad</h2>
     <p>Este sitio web contiene contenido de <strong>naturaleza adulta</strong>. El acceso está estrictamente reservado a personas mayores de 18 años. Al acceder, el usuario declara bajo su <strong>propia responsabilidad</strong> ser mayor de edad conforme a la legislación del país desde el que accede.</p>
-    <p style="margin-top:0.75rem;">Olympus Agency no se hace responsable del acceso de menores al sitio en contra de estas condiciones. Para información sobre herramientas de protección de menores, visita nuestra página de <a href="/control-parental">Control Parental</a>.</p>
+    <p style="margin-top:0.75rem;">Olympus Agency no se hace responsable del acceso de menores al sitio en contra de estas condiciones. Para información sobre herramientas de protección de menores, visita nuestra página de <a href={u("/control-parental")}>Control Parental</a>.</p>
   </div>
 
   <div class="legal-section">
@@ -55,7 +56,7 @@ import LegalLayout from '../layouts/LegalLayout.astro';
 
   <div class="legal-section">
     <h2>7 — Privacidad y confidencialidad</h2>
-    <p>Olympus Agency garantiza la <strong>total confidencialidad</strong> de los datos de sus usuarios. No compartimos información de clientes con terceros bajo ninguna circunstancia. Para más detalles, consulta nuestra <a href="/privacidad">Política de Privacidad</a>.</p>
+    <p>Olympus Agency garantiza la <strong>total confidencialidad</strong> de los datos de sus usuarios. No compartimos información de clientes con terceros bajo ninguna circunstancia. Para más detalles, consulta nuestra <a href={u("/privacidad")}>Política de Privacidad</a>.</p>
   </div>
 
   <div class="legal-section">
@@ -68,6 +69,6 @@ import LegalLayout from '../layouts/LegalLayout.astro';
     <p>Olympus Agency se reserva el derecho de <strong>modificar estas Condiciones</strong> en cualquier momento. Las modificaciones entrarán en vigor desde el momento de su publicación en el sitio web. El uso continuado del sitio tras la publicación de cambios implica su aceptación.</p>
   </div>
 
-  <p class="legal-footer-note">Última actualización: junio 2025 · <a href="/privacidad" style="color:#c9a84c;">Política de Privacidad</a> · <a href="/politica-cookies" style="color:#c9a84c;">Política de Cookies</a></p>
+  <p class="legal-footer-note">Última actualización: junio 2025 · <a href={u("/privacidad")} style="color:#c9a84c;">Política de Privacidad</a> · <a href={u("/politica-cookies")} style="color:#c9a84c;">Política de Cookies</a></p>
 
 </LegalLayout>

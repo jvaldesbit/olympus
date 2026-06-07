@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 ---
 
 <div id="age-modal" class="fixed inset-0 z-[999] flex items-center justify-center p-4" style="display:none!important">
@@ -44,11 +45,11 @@
 
     <!-- Links legales -->
     <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 pt-5 border-t border-white/5 text-xs">
-      <a href="/politica-cookies" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de Cookies</a>
-      <a href="/configuracion-cookies" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Configuración Cookie</a>
-      <a href="/control-parental" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Control parental</a>
-      <a href="/privacidad" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de privacidad</a>
-      <a href="/condiciones" target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Condiciones de uso</a>
+      <a href={u("/politica-cookies")} target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de Cookies</a>
+      <a href={u("/configuracion-cookies")} target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Configuración Cookie</a>
+      <a href={u("/control-parental")} target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Control parental</a>
+      <a href={u("/privacidad")} target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Política de privacidad</a>
+      <a href={u("/condiciones")} target="_blank" class="text-gray-500 hover:text-[#c9a84c] transition-colors">Condiciones de uso</a>
     </div>
   </div>
 </div>

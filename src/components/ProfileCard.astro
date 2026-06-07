@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 interface Props {
   name: string;
   age: number;
@@ -12,7 +13,7 @@ interface Props {
 const { name, age, city, tags, image, slug, featured = false } = Astro.props;
 ---
 
-<a href={`/perfiles/${slug}`} class="card-profile block">
+<a href={u(`/perfiles/${slug}`)} class="card-profile block">
   <div class="relative overflow-hidden aspect-[3/4]">
     <img
       src={image}

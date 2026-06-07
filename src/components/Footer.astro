@@ -1,4 +1,5 @@
 ---
+import { u } from '../utils/url';
 const year = new Date().getFullYear();
 ---
 
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
         <ul class="space-y-3">
           {['Inicio', 'Escorts', 'Servicios', 'Contacto'].map(item => (
             <li>
-              <a href={item === 'Inicio' ? '/' : item === 'Escorts' ? '/perfiles' : `/#${item.toLowerCase()}`}
+              <a href={u(item === 'Inicio' ? '/' : item === 'Escorts' ? '/perfiles' : `/#${item.toLowerCase()}`)}
                 class="text-gray-500 text-sm hover:text-[#c9a84c] transition-colors duration-300 tracking-wide">
                 {item}
               </a>

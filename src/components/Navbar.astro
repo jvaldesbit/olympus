@@ -7,11 +7,12 @@ const navLinks = [
 ];
 
 const currentPath = Astro.url.pathname;
+import { u } from '../utils/url';
 ---
 
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" data-navbar>
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3 group">
+    <a href={u("/")} class="flex items-center gap-3 group">
       <span class="text-2xl uppercase text-white group-hover:text-[#c9a84c] transition-colors duration-300" style="font-family: 'Anton', sans-serif; letter-spacing: 0.15em;">
         OLYMPUS
       </span>
@@ -21,7 +22,7 @@ const currentPath = Astro.url.pathname;
     <nav class="hidden md:flex items-center gap-8">
       {navLinks.map(link => (
         <a
-          href={link.href}
+          href={u(link.href)}
           class:list={[
             'text-sm tracking-widest uppercase transition-colors duration-300',
             currentPath === link.href
@@ -35,7 +36,7 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="hidden md:flex items-center gap-4">
-      <a href="/#contacto" class="btn-gold text-xs py-2 px-5">
+      <a href={u("/#contacto")} class="btn-gold text-xs py-2 px-5">
         Háblanos
       </a>
     </div>
@@ -50,11 +51,11 @@ const currentPath = Astro.url.pathname;
   <div id="mobile-menu" class="hidden md:hidden bg-[#0a0a0a]/98 border-t border-[#c9a84c]/20">
     <div class="px-6 py-6 flex flex-col gap-5">
       {navLinks.map(link => (
-        <a href={link.href} class="text-gray-300 hover:text-[#c9a84c] text-sm tracking-widest uppercase transition-colors">
+        <a href={u(link.href)} class="text-gray-300 hover:text-[#c9a84c] text-sm tracking-widest uppercase transition-colors">
           {link.label}
         </a>
       ))}
-      <a href="/#contacto" class="btn-gold text-center mt-2">Háblanos</a>
+      <a href={u("/#contacto")} class="btn-gold text-center mt-2">Háblanos</a>
     </div>
   </div>
 </header>
