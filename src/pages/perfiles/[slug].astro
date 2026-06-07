@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'valentina' } },
+    { params: { slug: 'isabella' } },
+    { params: { slug: 'camila' } },
+    { params: { slug: 'sofia' } },
+    { params: { slug: 'natalia' } },
+    { params: { slug: 'alejandra' } },
+    { params: { slug: 'daniela' } },
+    { params: { slug: 'mariana' } },
+  ];
+}
+
+const profiles: Record<string, {
+  name: string;
+  age: number;
+  city: string;
+  tags: string[];
+  image: string;
+  gallery: string[];
+  bio: string;
+  services: string[];
+  height: string;
+  nationality: string;
+  languages: string[];
+}> = {
+  valentina: {
+    name: 'Valentina',
+    age: 24,
+    city: 'Bogotá',
+    tags: ['Compañía', 'Viajes', 'VIP'],
+    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&q=80',
+      'https://images.unsplash.com/photo-1526510747491-58f928ec870f?w=500&q=80',
+      'https://images.unsplash.com/photo-1519311965067-36d3e5f33d39?w=500&q=80',
+    ],
+    bio: 'Valentina es una joven sofisticada con un encanto natural que cautiva a todos. Con estudios en administración de empresas y una personalidad magnética, es la compañera perfecta para eventos exclusivos o escapadas privadas.',
+    services: ['Cenas románticas', 'Eventos sociales', 'Viajes nacionales', 'Viajes internacionales', 'Compañía VIP'],
+    height: '1.68m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés'],
+  },
+  isabella: {
+    name: 'Isabella',
+    age: 22,
+    city: 'Medellín',
+    tags: ['Eventos', 'Elegancia', 'Premium'],
+    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80',
+    ],
+    bio: 'Isabella irradia elegancia y sofisticación. Experta en protocolo social, es la compañera ideal para eventos corporativos de alto nivel donde la imagen y el porte son fundamentales.',
+    services: ['Eventos corporativos', 'Galas y recepciones', 'Cenas de negocios', 'Compañía social'],
+    height: '1.72m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés', 'Francés'],
+  },
+  camila: {
+    name: 'Camila',
+    age: 26,
+    city: 'Cali',
+    tags: ['Compañía', 'Conversación', 'Discreta'],
+    image: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=500&q=80',
+    ],
+    bio: 'Camila combina inteligencia y sensualidad con una discreción impecable. Lectora voraz y conversadora brillante, adaptada a cualquier ambiente social con naturalidad.',
+    services: ['Compañía intelectual', 'Cenas privadas', 'Eventos culturales', 'Escapadas de fin de semana'],
+    height: '1.65m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés'],
+  },
+  sofia: {
+    name: 'Sofia',
+    age: 23,
+    city: 'Bogotá',
+    tags: ['Viajes', 'VIP', 'Internacional'],
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&q=80',
+    ],
+    bio: 'Sofía es cosmopolita y viajera empedernida. Con experiencia en destinos de lujo en todo el mundo, es la compañera perfecta para aventuras internacionales sin límites.',
+    services: ['Viajes internacionales', 'Yates y cruceros', 'Experiencias de lujo', 'Compañía VIP'],
+    height: '1.70m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés', 'Portugués'],
+  },
+  natalia: {
+    name: 'Natalia',
+    age: 25,
+    city: 'Medellín',
+    tags: ['Cenas', 'Eventos', 'Exclusiva'],
+    image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=800&q=80',
+    gallery: [],
+    bio: 'Natalia posee una presencia que no pasa desapercibida. Modelo profesional con años de experiencia en el mundo del entretenimiento, ofrece una compañía única e irrepetible.',
+    services: ['Eventos exclusivos', 'Cenas románticas', 'Sesiones fotográficas', 'Compañía privada'],
+    height: '1.75m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés'],
+  },
+  alejandra: {
+    name: 'Alejandra',
+    age: 27,
+    city: 'Bogotá',
+    tags: ['VIP', 'Viajes', 'Premium'],
+    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&q=80',
+    gallery: [],
+    bio: 'Alejandra es la definición de mujer moderna: profesional, elegante y fascinante. Su formación en relaciones internacionales la convierte en la compañera perfecta para cualquier escenario.',
+    services: ['Viajes VIP', 'Eventos diplomáticos', 'Cenas exclusivas', 'Compañía a largo plazo'],
+    height: '1.67m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés', 'Alemán'],
+  },
+  daniela: {
+    name: 'Daniela',
+    age: 21,
+    city: 'Cali',
+    tags: ['Compañía', 'Joven', 'Dinámica'],
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800&q=80',
+    gallery: [],
+    bio: 'Daniela es energía pura. Joven, espontánea y llena de vida, trae frescura y entusiasmo a cada encuentro. Perfecta para quienes buscan una compañía vibrante y divertida.',
+    services: ['Salidas dinámicas', 'Eventos informales', 'Compañía joven', 'Actividades al aire libre'],
+    height: '1.63m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés básico'],
+  },
+  mariana: {
+    name: 'Mariana',
+    age: 28,
+    city: 'Barranquilla',
+    tags: ['Madura', 'Sofisticada', 'Internacional'],
+    image: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=800&q=80',
+    gallery: [],
+    bio: 'Mariana es la combinación perfecta de madurez y sensualidad. Con amplia experiencia en el mundo empresarial, ofrece una compañía refinada y estimulante en todos los sentidos.',
+    services: ['Compañía ejecutiva', 'Viajes de negocios', 'Cenas de alto nivel', 'Eventos internacionales'],
+    height: '1.69m',
+    nationality: 'Colombiana',
+    languages: ['Español', 'Inglés', 'Italiano'],
+  },
+};
+
+const { slug } = Astro.params;
+const profile = profiles[slug as string];
+
+if (!profile) {
+  return Astro.redirect('/perfiles');
+}
+---
+
+<Layout title={profile.name} description={`Perfil de ${profile.name} — Olympus Agency`}>
+  <Navbar />
+
+  <div class="pt-20 min-h-screen">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Imagen principal -->
+        <div class="relative">
+          <img
+            src={profile.image}
+            alt={profile.name}
+            class="w-full aspect-[3/4] object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+        </div>
+
+        <!-- Info -->
+        <div class="flex flex-col justify-center">
+          <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-2">{profile.city}</p>
+          <h1 class="text-5xl md:text-6xl font-bold text-white mb-2" style="font-family: 'Playfair Display', serif;">
+            {profile.name}
+          </h1>
+          <div class="flex items-center gap-4 mb-8">
+            <span class="text-gray-500 text-sm">{profile.age} años</span>
+            <span class="w-px h-4 bg-[#c9a84c]/30"></span>
+            <span class="text-gray-500 text-sm">{profile.nationality}</span>
+            <span class="w-px h-4 bg-[#c9a84c]/30"></span>
+            <span class="text-gray-500 text-sm">{profile.height}</span>
+          </div>
+
+          <p class="text-gray-400 text-base leading-relaxed mb-8">{profile.bio}</p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            {profile.tags.map(tag => (
+              <span class="text-[10px] tracking-widest uppercase text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <!-- Idiomas -->
+          <div class="mb-8">
+            <p class="text-[#c9a84c] text-xs tracking-widest uppercase mb-3">Idiomas</p>
+            <p class="text-gray-400 text-sm">{profile.languages.join(' · ')}</p>
+          </div>
+
+          <!-- Servicios -->
+          <div class="mb-10">
+            <p class="text-[#c9a84c] text-xs tracking-widest uppercase mb-4">Servicios</p>
+            <ul class="space-y-2">
+              {profile.services.map(service => (
+                <li class="flex items-center gap-3 text-gray-400 text-sm">
+                  <span class="w-1 h-1 bg-[#c9a84c] rounded-full shrink-0"></span>
+                  {service}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="flex gap-4">
+            <a href="https://wa.me/1234567890" target="_blank" rel="noopener" class="btn-gold flex-1 text-center">
+              Reservar Ahora
+            </a>
+            <a href="/perfiles" class="btn-outline px-5 py-3">
+              ← Volver
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Galería -->
+      {profile.gallery.length > 0 && (
+        <div class="mt-16">
+          <h2 class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-6">Galería</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {profile.gallery.map(img => (
+              <img src={img} alt={profile.name} class="w-full aspect-[3/4] object-cover" loading="lazy" />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <Footer />
+</Layout>

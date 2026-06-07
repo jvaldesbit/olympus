@@ -1,0 +1,148 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ProfileCard from '../../components/ProfileCard.astro';
+
+const profiles = [
+  {
+    name: 'Valentina',
+    age: 24,
+    city: 'Bogotá',
+    tags: ['Compañía', 'Viajes', 'VIP'],
+    image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=80',
+    slug: 'valentina',
+    featured: true,
+  },
+  {
+    name: 'Isabella',
+    age: 22,
+    city: 'Medellín',
+    tags: ['Eventos', 'Elegancia', 'Premium'],
+    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80',
+    slug: 'isabella',
+  },
+  {
+    name: 'Camila',
+    age: 26,
+    city: 'Cali',
+    tags: ['Compañía', 'Conversación', 'Discreta'],
+    image: 'https://images.unsplash.com/photo-1488716820095-cbe80883c496?w=600&q=80',
+    slug: 'camila',
+  },
+  {
+    name: 'Sofia',
+    age: 23,
+    city: 'Bogotá',
+    tags: ['Viajes', 'VIP', 'Internacional'],
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80',
+    slug: 'sofia',
+  },
+  {
+    name: 'Natalia',
+    age: 25,
+    city: 'Medellín',
+    tags: ['Cenas', 'Eventos', 'Exclusiva'],
+    image: 'https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80',
+    slug: 'natalia',
+  },
+  {
+    name: 'Alejandra',
+    age: 27,
+    city: 'Bogotá',
+    tags: ['VIP', 'Viajes', 'Premium'],
+    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80',
+    slug: 'alejandra',
+  },
+  {
+    name: 'Daniela',
+    age: 21,
+    city: 'Cali',
+    tags: ['Compañía', 'Joven', 'Dinámica'],
+    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80',
+    slug: 'daniela',
+  },
+  {
+    name: 'Mariana',
+    age: 28,
+    city: 'Barranquilla',
+    tags: ['Madura', 'Sofisticada', 'Internacional'],
+    image: 'https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=600&q=80',
+    slug: 'mariana',
+  },
+];
+
+const cities = ['Todas', 'Bogotá', 'Medellín', 'Cali', 'Barranquilla'];
+---
+
+<Layout title="Perfiles" description="Conoce nuestros perfiles exclusivos de acompañantes de lujo en Olympus Agency.">
+  <Navbar />
+
+  <div class="pt-28 pb-24 px-6 min-h-screen">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-14">
+        <p class="text-[#c9a84c] text-xs tracking-[0.4em] uppercase mb-4">Selección Exclusiva</p>
+        <h1 class="section-title">Nuestros Perfiles</h1>
+        <div class="gold-divider"></div>
+        <p class="text-gray-500 text-sm mt-4 max-w-xl mx-auto">
+          Cada perfil ha sido verificado y seleccionado por su elegancia, discreción y profesionalismo.
+        </p>
+      </div>
+
+      <!-- Filtros -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12" id="filters">
+        {cities.map((city, i) => (
+          <button
+            data-filter={city === 'Todas' ? 'all' : city}
+            class:list={[
+              'filter-btn text-xs tracking-widest uppercase px-5 py-2 border transition-all duration-300',
+              i === 0
+                ? 'border-[#c9a84c] text-[#c9a84c] bg-[#c9a84c]/10'
+                : 'border-[#c9a84c]/20 text-gray-500 hover:border-[#c9a84c]/50 hover:text-gray-300'
+            ]}
+          >
+            {city}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid de perfiles -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="profiles-grid">
+        {profiles.map(profile => (
+          <div data-city={profile.city} class="profile-item">
+            <ProfileCard {...profile} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const profileItems = document.querySelectorAll('.profile-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('border-[#c9a84c]', 'text-[#c9a84c]', 'bg-[#c9a84c]/10');
+        b.classList.add('border-[#c9a84c]/20', 'text-gray-500');
+      });
+      btn.classList.add('border-[#c9a84c]', 'text-[#c9a84c]', 'bg-[#c9a84c]/10');
+      btn.classList.remove('border-[#c9a84c]/20', 'text-gray-500');
+
+      const filter = btn.getAttribute('data-filter');
+      profileItems.forEach(item => {
+        const el = item as HTMLElement;
+        if (filter === 'all' || el.dataset.city === filter) {
+          el.style.display = 'block';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
